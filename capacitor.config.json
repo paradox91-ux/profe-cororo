@@ -1,0 +1,11 @@
+{
+  "appId": "com.chispa.profecororo",
+  "appName": "Chispa",
+  "webDir": "www",
+  "plugins": {
+    "SystemBars": {
+      "insetsHandling": "css",
+      "initialViewportFitValueHint": "cover"
+    }
+  }
+}
