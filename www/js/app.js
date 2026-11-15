@@ -1,8 +1,14 @@
 (function () {
   'use strict';
-  var CH = window.CHISPA.chapters;
+  var SUBJ = 'esp';
+  try { if (localStorage.getItem('chispa-subject') === 'mat') SUBJ = 'mat'; } catch (e) {}
+  var INFO = {
+    esp: { chapters: window.CHISPA.chapters, key: 'chispa-espanol9-v1', foot: 'Español y Literatura · 9.º grado', hello: 'Vamos a repasar Español y Literatura, capítulo a capítulo.' },
+    mat: { chapters: window.CHISPA.matChapters || [], key: 'chispa-mat9-v1', foot: 'Matemática · 9.º grado', hello: 'Vamos a practicar Matemática, capítulo a capítulo.' }
+  };
+  var CH = INFO[SUBJ].chapters;
   var $ = function (s) { return document.querySelector(s); };
-  var KEY = 'chispa-espanol9-v1';
+  var KEY = INFO[SUBJ].key;
   var HEARTS = 5;
   var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -95,7 +101,7 @@
     var pct = Math.round(done / total * 100);
     $('#heroTitle').textContent = done === 0 ? '¡Hola! Soy Chispi.' : done === total ? '¡Lo lograste!' : '¡Qué bueno verte!';
     $('#heroText').textContent = done === 0
-      ? 'Vamos a repasar Español y Literatura, capítulo a capítulo.'
+      ? INFO[SUBJ].hello
       : done === total ? 'Completaste todos los capítulos. ¡Eres una chispa!'
         : 'Llevas ' + done + ' de ' + total + ' lecciones. ¡Sigue así!';
     $('#totalFill').style.width = pct + '%';
@@ -144,6 +150,20 @@
     }
     openLesson(+b.dataset.i);
   });
+  // Selector de asignatura
+  (function () {
+    var box = $('#subjects');
+    $('#footText').textContent = INFO[SUBJ].foot;
+    box.querySelectorAll('button').forEach(function (b) {
+      var on = b.dataset.s === SUBJ;
+      b.classList.toggle('on', on); b.setAttribute('aria-pressed', on ? 'true' : 'false');
+      b.addEventListener('click', function () {
+        if (b.dataset.s === SUBJ) return;
+        try { localStorage.setItem('chispa-subject', b.dataset.s); } catch (e) {}
+        location.reload();
+      });
+    });
+  })();
   var rt;
   $('#reset').addEventListener('click', function () {
     var b = $('#reset');
@@ -180,8 +200,10 @@
   }
   function clean(s, q) {
     s = String(s).trim().replace(/\s+/g, ' ');
+    if (q.ns) s = s.replace(/\s+/g, '').replace(/−/g, '-').replace(/,/g, '.');
     if (!q.cs) s = s.toLowerCase();
     s = q.ac ? s.normalize('NFC') : s.normalize('NFD').replace(/[̀-ͯ]/g, '');
+    if (q.ns) return s.replace(/[;:!¡¿?«»"“”]/g, '').replace(/\.$/, '');
     return s.replace(/[.,;:!¡¿?«»"“”]/g, '').trim();
   }
   function heartsHTML() { return I.heart + '<span>' + L.hearts + '</span>'; }

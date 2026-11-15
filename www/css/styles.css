@@ -308,3 +308,8 @@ button{font:inherit;color:inherit;cursor:pointer}
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation:none!important;transition:none!important}
 }
+
+.subjects{display:flex;gap:8px;padding-block:14px 4px}
+.subjects button{flex:1;font:800 15px/1 var(--font-display);padding:12px 10px;border-radius:14px;border:2px solid var(--line);border-bottom-width:4px;background:var(--surface);color:var(--ink-soft);cursor:pointer}
+.subjects button.on{border-color:#1cb0f6;color:#1899d6;background:rgba(28,176,246,.1)}
+.subjects button:focus-visible{outline:3px solid #1cb0f6;outline-offset:2px}

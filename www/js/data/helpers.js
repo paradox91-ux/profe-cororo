@@ -14,6 +14,10 @@
     if (opt) for (var k in opt) r[k] = opt[k];
     return r;
   };
+  // n = respuesta numérica o algebraica corta (ignora espacios, acepta coma o punto decimal)
+  C.n = function (q, answers, why) {
+    return { t: 'i', q: q, a: answers, show: answers[0], ph: 'Escribe tu respuesta', why: why, ns: true };
+  };
   C.m = function (q, pairs, why) {
     return { t: 'm', q: q, pairs: pairs, why: why };
   };
