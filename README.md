@@ -1,6 +1,6 @@
 # Chispa · profe-cororo
 
-App de estudio de **Español y Literatura de 9.º grado**, con el estilo visual de Chispa (verde, tipografía Nunito, botones 3D y animaciones).
+App de estudio de **Español y Matemática y Literatura de 9.º grado**, con el estilo visual de Chispa (verde, tipografía Nunito, botones 3D y animaciones).
 
 - 6 capítulos = 6 niveles; cada epígrafe = un subnivel (43 en total) + un repaso por capítulo.
 - 247 ejercicios de menor a mayor dificultad: opción múltiple, escribir, unir parejas y ordenar.
